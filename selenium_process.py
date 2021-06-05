@@ -168,7 +168,7 @@ def _check_information_product(driver, product_sku, infos):
     time.sleep(1)
     for info in infos:
         size = info['attribute']
-        ele = driver.find_element_by_xpath("//class[contains(., '{}'".fomat(size))])
+        ele = driver.find_element_by_xpath("//class[contains(., '{}'".fomat(size))
         base_cost = info['base_cost']
         US_ship = info['US_ship']
         US_ship_add = info['US_ship_add']
