@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from constants import COLORS
 import urllib.request 
+import re 
 
 def login(driver):
     login_link = get_url('/login')
@@ -148,9 +149,34 @@ def _check_store_price(driver, product_sku, prices):
         EC.presence_of_element_located((By.ID, "SingleOptionSelector-0")))
     
     for price in prices:
-        size = price[attribute]
-        ele = driver.find_element_by_xpath("//select[@id='SingleOptionSelector-0']/option[text()='{}'".format(size)).click()
-        ele = driver.find_elements_by_class_name("price").get attribute()
+        size = price['attribute']
+        ele = driver.find_element_by_xpath("//select[@id='SingleOptionSelector-0']/option[text()='{}']".format(size)).click()
+        time.sleep(2)
+        ele = driver.find_element_by_class_name("price").text
+        if float(re.findall(r'\d+\.\d+', ele)[0]) != float(price['value']): 
+            return False
+    return True
+
+def _check_information_product(driver, product_sku, infos):
+    login(driver)
+    new_product_link = get_url('/u/products/new')
+    driver.get(new_product_link)
+    element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "btn-create-{}".format(product_sku.lower())))
+        )
+    ele = driver.find_element_by_xpath("//button[contains(., 'Info')]").click()
+    time.sleep(1)
+    for info in infos:
+        size = info['attribute']
+        ele = driver.find_element_by_xpath("//class[contains(., '{}'".fomat(size))])
+        base_cost = info['base_cost']
+        US_ship = info['US_ship']
+        US_ship_add = info['US_ship_add']
+        EU_ship = info['EU_ship']
+        EU_ship_add = info['EU_ship_add'] 
+        ROW_ship = info['ROW_ship']
+        ROW_ship_add = info['ROW_ship_add']
+
 
 
 

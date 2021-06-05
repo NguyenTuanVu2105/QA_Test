@@ -65,10 +65,6 @@ def check_store_price():
         "product": "ATS01", 
         "prices": [
             {
-                "attribute": "XS",
-                "value": "0"
-            },
-            {
                 "attribute": "S",
                 "value": "14"
             },
@@ -94,7 +90,78 @@ def check_store_price():
             }
         ] 
     }
-    check_store_price_process(testcase)
-    return jsonify({"success": True})
+    result = check_store_price_process(testcase)
+    return jsonify({"pass":result})
+
+@app.route('/api/v1/check_information_product', methods=['POST'])
+def check_information_product(): 
+    testcase = {
+        "product": "ATS01", 
+        "infos": [
+            {
+                "attribute": "S",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "8.9",
+                "EU_ship_add": "8.9",
+                "ROW_ship": "12.86",
+                "ROW_ship_add": "12.86",
+
+            },
+            {
+                "attribute": "M",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "8.9",
+                "EU_ship_add": "8.9",
+                "ROW_ship": "12.86",
+                "ROW_ship_add": "12.86",
+            },
+            {
+                "attribute": "L",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "10.9",
+                "EU_ship_add": "10.9",
+                "ROW_ship": "14.71",
+                "ROW_ship_add": "14.71",
+            },
+            {
+                "attribute": "XL",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "10.9",
+                "EU_ship_add": "10.9",
+                "ROW_ship": "14.71",
+                "ROW_ship_add": "14.71",
+            },
+            {
+                "attribute": "2XL",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "10.9",
+                "EU_ship_add": "10.9",
+                "ROW_ship": "14.71",
+                "ROW_ship_add": "14.71",
+            },
+            {
+                "attribute": "3XL",
+                "base_cost": "8",
+                "US_ship": "5.4",
+                "US_ship_add": "5.4",
+                "EU_ship": "10.9",
+                "EU_ship_add": "10.9",
+                "ROW_ship": "14.71",
+                "ROW_ship_add": "14.71",
+            }
+        ] 
+    }
+    result = check_information_product_process(testcase)
+    return jsonify({"pass":result})
 
 app.run()
